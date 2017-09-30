@@ -11,6 +11,7 @@ import { BsNavbarComponent } from './bs-navbar/bs-navbar.component';
 import { HomeComponent } from './home/home.component';
 import { ProductsComponent } from './products/products.component';
 import { ShoppingCartComponent } from './shopping-cart/shopping-cart.component';
+import { CheckOutComponent } from './check-out/check-out.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { ShoppingCartComponent } from './shopping-cart/shopping-cart.component';
     BsNavbarComponent,
     HomeComponent,
     ProductsComponent,
-    ShoppingCartComponent
+    ShoppingCartComponent,
+    CheckOutComponent
   ],
   imports: [
     BrowserModule,
