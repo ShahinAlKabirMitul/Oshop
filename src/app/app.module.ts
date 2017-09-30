@@ -13,6 +13,7 @@ import { ProductsComponent } from './products/products.component';
 import { ShoppingCartComponent } from './shopping-cart/shopping-cart.component';
 import { CheckOutComponent } from './check-out/check-out.component';
 import { OrderSuccessComponent } from './order-success/order-success.component';
+import { MyOrdersComponent } from './my-orders/my-orders.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { OrderSuccessComponent } from './order-success/order-success.component';
     ProductsComponent,
     ShoppingCartComponent,
     CheckOutComponent,
-    OrderSuccessComponent
+    OrderSuccessComponent,
+    MyOrdersComponent
   ],
   imports: [
     BrowserModule,
