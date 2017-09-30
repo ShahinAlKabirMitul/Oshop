@@ -1,7 +1,7 @@
 import { LoginComponent } from './login/login.component';
 import { RouterModule } from '@angular/router';
 
-
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 
 import { environment } from '../environments/environment';
 import { BrowserModule } from '@angular/platform-browser';
@@ -34,14 +34,17 @@ import { AdminOrdersComponent } from './admin/admin-orders/admin-orders.componen
     MyOrdersComponent,
     AdminProductsComponent,
     AdminOrdersComponent,
-    LoginComponent
+    LoginComponent,
+    
    
   ],
   imports: [
     BrowserModule,
+ 
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireDatabaseModule,
     AngularFireAuthModule,
+    NgbModule.forRoot(),
     RouterModule.forRoot([
       {path:'',component:HomeComponent},
       {path:'products',component:ProductsComponent},
