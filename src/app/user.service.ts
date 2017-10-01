@@ -11,12 +11,12 @@ export class UserService {
 
   }
   save(user:firebase.User){
-    console.log('Save User',user)
+  
     this.db.object('/users/'+user.uid).update({
       name:user.displayName,
       emai:user.email
     });
-    console.log('Save User End')
+    
   }
 
   get(uid:string):FirebaseObjectObservable<AppUser>{
