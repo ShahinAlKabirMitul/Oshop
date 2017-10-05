@@ -12,6 +12,7 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 
 import { FormsModule } from '@angular/forms';
 import { CustomFormsModule } from 'ng2-validation'
+import { DataTableModule } from 'angular-4-data-table/src/index';
 
 
 import { environment } from '../environments/environment';
@@ -50,15 +51,13 @@ import { ProductFormComponent } from './admin/product-form/product-form.componen
     AdminOrdersComponent,
     LoginComponent,
     ProductFormComponent
-    
-   
-    
-   
+
   ],
   imports: [
     BrowserModule,
     FormsModule,
     CustomFormsModule ,
+    DataTableModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireDatabaseModule,
     AngularFireAuthModule,
