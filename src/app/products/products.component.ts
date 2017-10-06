@@ -8,7 +8,10 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ProductsComponent {
 
-  constructor(productService:ProductService) { }
+  products$;
+  constructor(productService:ProductService) { 
+    this.products$=productService.getAll();
+  }
 
  
 
