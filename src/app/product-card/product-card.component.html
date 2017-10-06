@@ -5,7 +5,8 @@
       <p class="card-text">TK:{{product.price}}</p>
       
   </div>
-  <div class="card-footer">
-    <button *ngIf="showActions" (click)="addToCart(product)" class="btn btn-primary btn-block" >Add to Cart</button>
+  <div *ngIf="showActions" class="card-footer">
+    <button  (click)="addToCart(product)" class="btn btn-primary btn-block" >Add to Cart</button>
+    <div>{{getQantity()}}</div>
   </div>
 </div>

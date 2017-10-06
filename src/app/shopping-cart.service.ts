@@ -14,7 +14,8 @@ export class ShoppingCartService {
         dateCreated:new Date().getTime()
       })
   }
-private getCart(cartId:string){
+async getCart(){
+  let cartId=await this.getOrCreateCartId();
   return this.db.object('/shopping-carts/'+cartId);
 }
 
@@ -22,7 +23,7 @@ private getItem(cartId:string,productId:string){
  return this.db.object('/shopping-carts/'+cartId+'/items/'+productId);
 }
 
- private async getOrCreateCartId(){
+ private async getOrCreateCartId():Promise<string> {
 
     let cartId=localStorage.getItem('cartId');
     if(cartId){
@@ -35,8 +36,6 @@ private getItem(cartId:string,productId:string){
    
 }
 async addToCart(product:product){
-
-  console.log('addToCart ShoppingCartService',product);
   let cartId =await this.getOrCreateCartId();
   let item$=this.getItem(cartId,product.$key);
   item$.take(1).subscribe(item=>{
