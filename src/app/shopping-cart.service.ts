@@ -1,3 +1,6 @@
+import { Observable } from 'rxjs/Rx';
+import { ShoppingCart } from './models/shopping-cart';
+import { FirebaseObjectObservable } from 'angularfire2/database/firebase_object_observable';
 import { number } from 'ng2-validation/dist/number';
 import { async } from '@angular/core/testing';
 import { product } from './models/product';
@@ -15,9 +18,10 @@ export class ShoppingCartService {
         dateCreated:new Date().getTime()
       })
   }
-async getCart(){
+async getCart():Promise<Observable<ShoppingCart>> {
   let cartId=await this.getOrCreateCartId();
-  return this.db.object('/shopping-carts/'+cartId);
+  return this.db.object('/shopping-carts/'+cartId)
+      .map(x=>new ShoppingCart(x.items));
 }
 
 private getItem(cartId:string,productId:string){
