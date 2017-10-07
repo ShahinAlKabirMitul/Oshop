@@ -1,3 +1,4 @@
+import { Order } from './../models/order';
 import { AuthService } from '../auth.service';
 import { OrderService } from './../order.service';
 import { Subscription } from 'rxjs/Rx';
@@ -33,22 +34,8 @@ async ngOnInit(){
   }
   placeOrder() {
     console.log(this.shipping);
-    let order={
-      userId:this.userId,
-      datePlaced:new Date().getTime(),
-      shipping:this.shipping,
-      items:this.cart.items.map(i=>{
-        return{
-          product:{
-            title:i.title,
-            imageUrl:i.imageUrl,
-            price:i.price
-          },
-          quantity:i.quantity,
-          totalPrice:i.totalPrice
-        }
-      })
-    };
+    let order=new Order(this.userId,this.shipping,this.cart);
+    
     this.orderService.storeOrder(order);
   }    
   
