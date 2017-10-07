@@ -1,3 +1,4 @@
+
 import { Observable } from 'rxjs/Rx';
 import { ShoppingCart } from './models/shopping-cart';
 import { FirebaseObjectObservable } from 'angularfire2/database/firebase_object_observable';
@@ -13,16 +14,30 @@ export class ShoppingCartService {
   constructor(private db :AngularFireDatabase) {
 
    }
+
+  async addToCart(product:product){
+    this.UpdateItem(product,1)
+  }
+  async RemoveFromCart(product:product){
+    this.UpdateItem(product,-1)
+  }
+  async getCart():Promise<Observable<ShoppingCart>> {
+    let cartId=await this.getOrCreateCartId();
+    return this.db.object('/shopping-carts/'+cartId)
+        .map(x=>new ShoppingCart(x.items));
+  }
+
+ async clearCart(){
+   let cartId=await this.getOrCreateCartId();
+   this.db.object('/shopping-carts/'+cartId+'/items').remove();
+
+}
  private create(){
     return  this.db.list('/shopping-carts').push({
         dateCreated:new Date().getTime()
       })
   }
-async getCart():Promise<Observable<ShoppingCart>> {
-  let cartId=await this.getOrCreateCartId();
-  return this.db.object('/shopping-carts/'+cartId)
-      .map(x=>new ShoppingCart(x.items));
-}
+
 
 private getItem(cartId:string,productId:string){
  return this.db.object('/shopping-carts/'+cartId+'/items/'+productId);
@@ -40,12 +55,7 @@ private getItem(cartId:string,productId:string){
     return result.key;
    
 }
-async addToCart(product:product){
-  this.UpdateItem(product,1)
-}
-async RemoveFromCart(product:product){
-  this.UpdateItem(product,-1)
-}
+
 
 private async UpdateItem(product:product,change:number){
   let cartId =await this.getOrCreateCartId();
