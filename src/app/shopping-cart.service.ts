@@ -41,17 +41,21 @@ private getItem(cartId:string,productId:string){
    
 }
 async addToCart(product:product){
-  this.UpdateQuantity(product,1)
+  this.UpdateItem(product,1)
 }
 async RemoveFromCart(product:product){
-  this.UpdateQuantity(product,-1)
+  this.UpdateItem(product,-1)
 }
 
-private async UpdateQuantity(product:product,change:number){
+private async UpdateItem(product:product,change:number){
   let cartId =await this.getOrCreateCartId();
   let item$=this.getItem(cartId,product.$key);
   item$.take(1).subscribe(item=>{
-    item$.update({product:product,quantity:(item.quantity||0) +change});
+    item$.update({
+     title:product.title,
+     imageUrl:product.imageUrl,
+     price:product.price,
+     quantity:(item.quantity||0) +change});
    
   });
 }
