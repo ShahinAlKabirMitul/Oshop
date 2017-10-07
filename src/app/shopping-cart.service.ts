@@ -1,3 +1,4 @@
+import { number } from 'ng2-validation/dist/number';
 import { async } from '@angular/core/testing';
 import { product } from './models/product';
 import { AngularFireDatabase } from 'angularfire2/database';
@@ -5,7 +6,7 @@ import { Injectable } from '@angular/core';
 
 @Injectable()
 export class ShoppingCartService {
-
+    
   constructor(private db :AngularFireDatabase) {
 
    }
@@ -36,12 +37,20 @@ private getItem(cartId:string,productId:string){
    
 }
 async addToCart(product:product){
+  this.UpdateQuantity(product,1)
+}
+async RemoveFromCart(product:product){
+  this.UpdateQuantity(product,-1)
+}
+
+private async UpdateQuantity(product:product,change:number){
   let cartId =await this.getOrCreateCartId();
   let item$=this.getItem(cartId,product.$key);
   item$.take(1).subscribe(item=>{
-    item$.update({product:product,quantity:(item.quantity||0) +1});
+    item$.update({product:product,quantity:(item.quantity||0) +change});
    
   });
 }
+
 
 }
