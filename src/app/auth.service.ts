@@ -22,7 +22,20 @@ export class AuthService {
     localStorage.setItem('returnUrl',returnUrl);
     this.afAuth.auth.signInWithRedirect(new firebase.auth.GoogleAuthProvider());
    }
+   loginFacebook(){
+    let returnUrl=this.route.snapshot.queryParamMap.get('returnUrl')|| '/';
+    localStorage.setItem('returnUrl',returnUrl);
+ //   this.afAuth.auth.signInWithRedirect(new firebase.auth.FacebookAuthProvider());
+    // Sign in using a redirect.
+firebase.auth().getRedirectResult().then(function(result) {
+  if (result.credential) {
+    // This gives you a Google Access Token.
+    var token = result.credential.accessToken;
+  }
+  var user = result.user;
+})
 
+   }
    logout(){
     this.afAuth.auth.signOut();
    }
